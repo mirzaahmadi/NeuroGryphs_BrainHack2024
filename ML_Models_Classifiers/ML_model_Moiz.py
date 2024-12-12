@@ -52,3 +52,22 @@ X_train, X_test, y_train, y_test = data_split(X, y, 0.2)
 model = fit_model(LogisticRegression(max_iter=200), X_train,y_train)
 performance = model_Testing(model,X_test,y_test)
 accuracy = accuracy_testing(model, X_test,y_test)
+
+"""Visualization the results"""
+from sklearn.metrics import confusion_matrix
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+#Confusion matrix
+#Prediction
+y_pred = model.predict(X_test)
+# Generate the confusion matrix
+cm = confusion_matrix(y_test, y_pred)
+#visualization
+# Create a Confusion Matrix
+plt.figure(figsize=(8, 8))
+sns.heatmap(cm, annot=True, fmt='d', cmap='Greens')
+plt.title('Confusion Matrix')
+plt.ylabel('True label')
+plt.xlabel('Predicted label')
+plt.show()

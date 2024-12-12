@@ -11,4 +11,4 @@
 
 # train the model on the x_testing values and x and y training values (the features and labels for the training dataset)
     # Within this training, I will pick the algorithm I want to use using SCIKITLEARN, fit the evidence and the labels onto that and return the model - this will be our trained model which we can use in our dataset
-    #FROM HERE - we can simply plug in our testing datasets and gauge the accuracy 
+    #FROM HERE - we can simply plug in our testing datasets and gauge the accuracy

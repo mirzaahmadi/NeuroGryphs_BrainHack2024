@@ -53,7 +53,7 @@ model = fit_model(LogisticRegression(max_iter=200), X_train,y_train)
 performance = model_Testing(model,X_test,y_test)
 accuracy = accuracy_testing(model, X_test,y_test)
 
-"""Visualization the results"""
+"""Visualization of the results"""
 from sklearn.metrics import confusion_matrix
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -70,4 +70,13 @@ sns.heatmap(cm, annot=True, fmt='d', cmap='Greens')
 plt.title('Confusion Matrix')
 plt.ylabel('True label')
 plt.xlabel('Predicted label')
+plt.show()
+
+#Heatmap
+correlation_matrix = data.corr()
+
+#Plotting the data
+plt.figure(figsize=(10, 8))  # Adjust size as needed
+sns.heatmap(correlation_matrix, annot=True, cmap="coolwarm", fmt=".2f", square=True)
+plt.title("Feature Correlation Heatmap")
 plt.show()

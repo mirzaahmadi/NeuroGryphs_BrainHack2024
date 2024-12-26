@@ -5,6 +5,8 @@ import pickle #This package is used to save the trained classifier as a pickle o
 import csv
 import sys
 from sklearn.ensemble import RandomForestClassifier
+#from sklearn.neighbors import KNeighborsClassifier
+#from sklearn.svm import SVC
 from sklearn.model_selection import cross_validate
 from sklearn.model_selection import cross_val_predict
 from sklearn.metrics import confusion_matrix
@@ -35,6 +37,8 @@ def main():
                                 scoring=['accuracy', 'precision_macro', 'recall_macro', 'f1_macro'], 
                                 return_train_score=False)
     
+    print("")
+    print("TRAINING DATA - ACCURACY METRICS")
     print("Accuracy scores:", cv_results['test_accuracy'])
     print("Mean accuracy:", cv_results['test_accuracy'].mean())
 
@@ -46,6 +50,7 @@ def main():
 
     print("F1 scores:", cv_results['test_f1_macro'])
     print("Mean F1 score:", cv_results['test_f1_macro'].mean())
+    print('')
     
     #Obtain the confusion matrix
     predicted_targets = cross_val_predict(model, features, targets, cv=5)
@@ -72,7 +77,7 @@ def load_data(filename):
     # Convert target values to numerical
     converted_target_list = []
     for target_value in targets:
-        if target_value == "Resting":
+        if target_value == "Rest":
             converted_target_list.append(0.0)
         elif target_value == "Face":
             converted_target_list.append(1.0)

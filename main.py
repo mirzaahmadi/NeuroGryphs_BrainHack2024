@@ -37,19 +37,21 @@ def process(train, test):
 
     # Loop through files in the directory, creating list of training csv files
     for file in os.listdir("./" + train):  # List files in directory
+        file_path = os.path.join("./" + train, file)  # Construct full file path
         if "Rest" in file:  # Check if "Rest" is in the filename 
-            preprocessed_eeg = preprocess_eeg(file, channels, fs, 'Rest')
+            preprocessed_eeg = preprocess_eeg(file_path, channels, fs, 'Rest')
         elif "Face" in file: #Check if "Face" is in the filename
-            preprocessed_eeg = preprocess_eeg(file, channels, fs, 'Face')
+            preprocessed_eeg = preprocess_eeg(file_path, channels, fs, 'Face')
         
         csv_files_training.append(preprocessed_eeg)
     
     # Loop through files in the directory, creating list of testing csv files
     for file in os.listdir("./" + test):  
+        file_path = os.path.join("./" + test, file)  # Construct full file path
         if "Rest" in file: 
-            preprocessed_eeg = preprocess_eeg(file, channels, fs, 'Rest')
+            preprocessed_eeg = preprocess_eeg(file_path, channels, fs, 'Rest')
         elif "Face" in file: 
-            preprocessed_eeg = preprocess_eeg(file, channels, fs, 'Face')
+            preprocessed_eeg = preprocess_eeg(file_path, channels, fs, 'Face')
         
         csv_files_testing.append(preprocessed_eeg)
     

@@ -5,46 +5,34 @@ import pickle
 from brain_wave_classifier import load_data
 import re
 import sys
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
 
 def main():
     # Checks command line arguments to ensure arguments are correctly formatted
     if len(sys.argv) != 2:
-        sys.exit("Usage: python predict_new_data.py 'dataset.csv' \n Incorrect number of arguments")
+        sys.exit("Usage: python predict_brain_waves.py 'dataset.csv' \n Incorrect number of arguments")
     if not re.search(r".+\.csv$" ,sys.argv[1]):
-        sys.exit("Usage: python brain_wave_classifier.py 'dataset.csv' \n Please make sure the dataset is in .CSV format")
+        sys.exit("Usage: python predict_brain_waves.py 'dataset.csv' \n Please make sure the dataset is in .CSV format")
     
     # Only features are needed, as the model will be predicting targets
     features, targets = load_data(sys.argv[1])  
     
-    number_of_rests = 0
-    number_of_faces = 0
-    
-    for pair in zip(features, targets):
-        if pair[1] == 0.0:
-            number_of_rests += 1
-        if pair[1] == 1.0:
-            number_of_faces += 1
-            
-       
-    # Load the trained model from the pickle file - to use on the unseen data
+    #Load the trained model
     with open('trained_model.pkl', 'rb') as f:
         trained_model = pickle.load(f)
     
     # Use the loaded model for predictions
     predictions = trained_model.predict(features)
     
-    resting = 0
-    faces = 0
-    
-    for pred in predictions:
-        print(pred)
-        
-        if pred == 0.0:
-            resting += 1
-        if pred == 1.0:
-            faces += 1
-    
-    print("Accuracy: ", (resting / (resting + faces)) * 100)
+    # Evaluate the model - multiple accuracy metrics employed
+    accuracy = accuracy_score(targets, predictions)
+    print("")
+    print("")
+    print('TESTING DATASET - ACCURACY METRICS')
+    print(f"Accuracy: {accuracy * 100:.2f}%")
+    print("Confusion Matrix:\n", confusion_matrix(targets, predictions))
+    print("Classification Report:\n", classification_report(targets, predictions, target_names=["Rest", "Face"]))
         
         
 if __name__ == "__main__":

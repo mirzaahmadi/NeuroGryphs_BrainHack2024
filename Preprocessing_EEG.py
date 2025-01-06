@@ -1,6 +1,10 @@
 import pandas as pd
 import numpy as np
 from scipy.signal import butter, filtfilt, iirnotch
+import matplotlib
+matplotlib.use('TkAgg')
+import matplotlib.pyplot as plt
+import os
 
 # Define the preprocessing function
 def preprocess_eeg(file_path, channels, fs, target_entry):
@@ -70,3 +74,39 @@ def preprocess_eeg(file_path, channels, fs, target_entry):
     preprocessed_data['Target'] = target_entry
 
     return preprocessed_data
+
+def plot_time_domain_signal(unfiltered_data, filtered_data, title, file_name):
+    plt.figure(figsize=(12, 6))
+
+    plt.subplot(2, 1, 1)
+    plt.plot(unfiltered_data)
+    plt.title(f"Unfiltered EEG - {title}")
+    plt.xlabel('Time (samples)')
+    plt.ylabel('Amplitude')
+
+    plt.subplot(2, 1, 2)
+    plt.plot(filtered_data)
+    plt.title(f"Filtered EEG - {title}")
+    plt.xlabel('Time (samples)')
+    plt.ylabel('Amplitude')
+
+    plt.tight_layout()
+    
+    #Save plots to folder
+    visualizations_folder_path = './Visualizations'
+    folder_path1 = 'time_domain_signal_plots'
+    os.makedirs(os.path.join(visualizations_folder_path, folder_path1), exist_ok=True)
+
+    plt.savefig(os.path.join(visualizations_folder_path, folder_path1, file_name), format='png', dpi=300)
+
+def plot_band_signal(filtered_band_data, band_name, title, file_name, aggregate):
+    plt.figure(figsize=(12, 6))
+    plt.plot(filtered_band_data[aggregate])
+    plt.title(f"Filtered {band_name} Band - {title}")
+    plt.xlabel('Time (samples)')
+    plt.ylabel('Amplitude')
+    
+    #Save plots to folder
+    folder_path2 = './Visualizations/band_signal_plots'
+    os.makedirs(folder_path2, exist_ok=True)
+    plt.savefig(os.path.join(folder_path2, file_name), format='png', dpi=300)

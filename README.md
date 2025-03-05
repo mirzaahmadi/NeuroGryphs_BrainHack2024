@@ -2,7 +2,7 @@
 
 ## Overview
 This repository contains the work of the NeuroGryphs team for BrainHack 2024.
-We aim to build an end-to-end EEG pipeline that includes data acquisition, preprocessing, predictive modeling, and GAN-based synthetic EEG generation. This comprehensive approach seeks to overcome challenges in accessing EEG data and provide novel insights into analyzing brain states.
+We aim to build an end-to-end EEG pipeline that includes data acquisition, preprocessing, predictive modeling, and GAN-based synthetic EEG generation. This comprehensive approach seeks to evaluate GAN-generated synthetic data as a proxy for limited real-world healthcare data.
 
 ## Demo Video
 

@@ -6,7 +6,7 @@ We aim to build an end-to-end EEG pipeline that includes data acquisition, prepr
 
 ## Demo Video
 
-[![Watch the Demo Video](https://www.youtube.com/watch?v=d2m1RBaY948&t=104s)
+[![Watch the Demo Video](https://www.youtube.com/watch?v=d2m1RBaY948&t=104s)]
 
 Click the image above to watch the video.
 
